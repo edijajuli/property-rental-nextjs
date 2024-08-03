@@ -1,5 +1,5 @@
-const PropertyAddPage = () => {
-  return <div>PropertyAddPage</div>;
+const AddPropertyPage = () => {
+  return <div>AddPropertyPage</div>;
 };
 
-export default PropertyAddPage;
+export default AddPropertyPage;
