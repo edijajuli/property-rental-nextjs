@@ -12,7 +12,7 @@ const Navbar = () => {
   const { data: session } = useSession();
   const profileImage = session?.user?.image;
   const [isMobileMenuOpen, setisMobileMenuOpen] = useState(false);
-  const [isProfileMobileOpen, setisProfileMobileOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
   // const [isLoggedIn, setisLoggedIn] = useState(true);
   const [providers, setProviders] = useState(null);
   const pathname = usePathname();
@@ -36,7 +36,7 @@ const Navbar = () => {
               id="mobile-dropdown-button"
               className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
               aria-controls="mobile-menu"
-              aria-expanded="false"
+              aria-expanded={isMobileMenuOpen}
               onClick={() => setisMobileMenuOpen((prev) => !prev)}
             >
               <span className="absolute -inset-0.5"></span>
@@ -156,9 +156,9 @@ const Navbar = () => {
                     type="button"
                     className="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
                     id="user-menu-button"
-                    aria-expanded="false"
+                    aria-expanded={isProfileMenuOpen}
                     aria-haspopup="true"
-                    onClick={() => setisProfileMobileOpen((prev) => !prev)}
+                    onClick={() => setIsProfileMenuOpen((prev) => !prev)}
                   >
                     <span className="absolute -inset-1.5"></span>
                     <span className="sr-only">Open user menu</span>
@@ -173,7 +173,7 @@ const Navbar = () => {
                 </div>
 
                 {/* <!-- Profile dropdown --> */}
-                {isProfileMobileOpen && (
+                {isProfileMenuOpen && (
                   <div
                     id="user-menu"
                     className=" absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
@@ -188,6 +188,9 @@ const Navbar = () => {
                       role="menuitem"
                       tabIndex="-1"
                       id="user-menu-item-0"
+                      onClick={() => {
+                        setIsProfileMenuOpen(false);
+                      }}
                     >
                       Your Profile
                     </Link>
@@ -197,6 +200,9 @@ const Navbar = () => {
                       role="menuitem"
                       tabIndex="-1"
                       id="user-menu-item-2"
+                      onClick={() => {
+                        setIsProfileMenuOpen(false);
+                      }}
                     >
                       Saved Properties
                     </Link>
@@ -206,7 +212,7 @@ const Navbar = () => {
                       tabIndex="-1"
                       id="user-menu-item-2"
                       onClick={() => {
-                        setisMobileMenuOpen(false);
+                        setIsProfileMenuOpen(false);
                         signOut();
                       }}
                     >
